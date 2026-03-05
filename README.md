@@ -1,17 +1,18 @@
 # F1 Telemetry Simulator
 
-A Python-based simulation of a Formula 1 telemetry system designed to explore how vehicle data is transmitted, processed, and monitored by a race engineer in real time.
+Python simulation of a Formula 1 telemetry system exploring how vehicle data is transmitted, processed, and monitored by a race engineer in real time.
 
-This project was built while learning socket programming in class and applies TCP/IP networking concepts to a motorsport-style telemetry environment.
+This project was developed while learning TCP/IP socket programming and applies networking concepts to a motorsport-style telemetry environment.
 
 ---
 
 ## Overview
 
-The system simulates a Formula 1 pit wall receiving telemetry from multiple cars.  
-Each car sends telemetry packets containing performance data such as speed, RPM, and G-force.
+The system simulates a Formula 1 pit wall receiving telemetry from multiple race cars.
 
-The server processes incoming data, updates the virtual garage state, and triggers alerts for race engineers when critical thresholds are exceeded.
+Each car sends telemetry packets containing vehicle performance data such as speed, RPM, and G-force. The server processes incoming telemetry streams, maintains a virtual garage state, and triggers alerts when safety or performance thresholds are exceeded.
+
+This models the type of real-time telemetry monitoring used by race engineers during a session.
 
 ---
 
@@ -19,17 +20,18 @@ The server processes incoming data, updates the virtual garage state, and trigge
 
 Car Client → Telemetry Server → Alert Detection → Race Engineer Output
 
-Multiple vehicles can send telemetry simultaneously, simulating the data flow of a two-car Formula 1 team garage.
+Multiple simulated vehicles can transmit telemetry simultaneously, representing a two-car Formula 1 team garage.
 
 ---
 
 ## Features
 
 - Real-time telemetry streaming using TCP socket programming
-- Multi-car simulation environment
+- Client-server architecture simulating car-to-pit data transmission
+- Multi-car telemetry simulation
 - Race engineer alert system for safety and performance thresholds
 - Simulated race context including track, session, and weather
-- Logging of telemetry events
+- Telemetry event logging
 
 ---
 
@@ -41,7 +43,7 @@ Multiple vehicles can send telemetry simultaneously, simulating the data flow of
 - Fuel level
 - Tyre wear
 
-Example packet:
+Example telemetry packet:
 
 CAR23 SPD 315
 
@@ -58,25 +60,48 @@ These simulate the types of notifications a race engineer might monitor during a
 
 ---
 
-## Files
+## Project Files
 
 telemetry_server.py  
-Main telemetry server that receives and processes vehicle data.
+Main telemetry server that receives and processes incoming telemetry data.
 
 telemetry_client.py  
-Simulated car client sending telemetry packets.
+Simulated vehicle client that sends telemetry packets to the server.
 
 williams_race_data.log  
-Example telemetry log generated during a simulated session.
+Example telemetry log generated during a simulated race session.
+
+---
+
+## How to Run
+
+Clone the repository:
+
+git clone https://github.com/eleanorOrad/f1-telemetry-simulator.git
+
+Navigate to the project directory:
+
+cd f1-telemetry-simulator
+
+Start the telemetry server:
+
+python telemetry_server.py
+
+In another terminal window, start a simulated car client:
+
+python telemetry_client.py
+
+Multiple clients can be run simultaneously to simulate multiple race cars sending telemetry data.
 
 ---
 
 ## What I Learned
 
-- TCP/IP socket programming and client-server architecture
-- How real-time telemetry systems must handle multiple data streams
-- How safety and performance thresholds can trigger automated alerts
-- How motorsport teams rely on telemetry to monitor vehicle performance
+- TCP/IP networking and socket programming
+- Client-server architecture for real-time systems
+- Handling multiple incoming telemetry streams
+- Designing automated safety and performance alerts
+- Understanding how motorsport teams use telemetry to monitor vehicle performance
 
 ---
 
@@ -85,4 +110,5 @@ Example telemetry log generated during a simulated session.
 - Implement UDP-based telemetry to simulate lower-latency communication
 - Add a graphical telemetry dashboard
 - Introduce additional telemetry signals such as throttle position and brake pressure
-- Add data visualization for race engineers
+- Add data visualization tools for race engineers
+- Simulate packet loss and latency to test telemetry reliability
